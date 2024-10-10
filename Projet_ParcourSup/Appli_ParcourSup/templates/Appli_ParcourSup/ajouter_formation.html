@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une formation</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">Parcoursup</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Page Accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'formations_view' %}">Offres de formation</a></li>
+                <li><a href="#">Mon dossier</a></li>
+                <li><a href="#">Aide</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Ajouter une nouvelle formation</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Cela affichera votre formulaire -->
+            <button type="submit">Ajouter</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Parcoursup - Tous droits réservés</p>
+    </footer>
+</body>
+</html>

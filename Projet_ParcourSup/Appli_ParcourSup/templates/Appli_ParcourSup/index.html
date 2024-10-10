@@ -3,20 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Bonjour</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 20%;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
+    <title>Accueil - Parcoursup</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 <body>
-    <h1>Bonjour !</h1>
+    <header>
+        <div class="logo">Parcoursup</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="formations/page/">Offres de formation</a></li>
+                <li><a href="#">Mon dossier</a></li>
+                <li><a href="#">Aide</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Bienvenue sur Parcoursup</h1>
+            <p>Découvrez les formations qui vous intéressent et construisez votre avenir.</p>
+            <div class="actions">
+                <a href="#" class="button">Créer un compte</a>
+                <a href="#" class="button">Se connecter</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Pourquoi choisir Parcoursup ?</h2>
+            <div class="feature">
+                <h3>Large choix de formations</h3>
+                <p>Accédez à un large éventail de formations dans toute la France.</p>
+            </div>
+            <div class="feature">
+                <h3>Accompagnement personnalisé</h3>
+                <p>Recevez des conseils pour vous aider à construire votre projet d'études.</p>
+            </div>
+            <div class="feature">
+                <h3>Processus simplifié</h3>
+                <p>Gérez vos candidatures en toute simplicité grâce à notre plateforme.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Parcoursup - Tous droits réservés</p>
+    </footer>
 </body>
 </html>

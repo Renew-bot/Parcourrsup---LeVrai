@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Formations</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">Parcoursup</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Page Accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'liste_formations' %}">Offres de formation</a></li>
+                <li><a href="#">Mon dossier</a></li>
+                <li><a href="#">Aide</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Liste des Formations</h1>
+    <a href="{% url 'ajouter_formation' %}">Ajouter une nouvelle formation</a>
+    <ul>
+        {% for formation in formations %}
+            <li>
+                {{ formation.nom }} - <a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
+                - <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
+            </li>
+        {% empty %}
+            <li>Aucune formation trouvée.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
