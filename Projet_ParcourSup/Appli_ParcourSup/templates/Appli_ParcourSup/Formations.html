@@ -20,14 +20,17 @@
         </nav>
     </header>
 
-    <!-- Contenu principal dans un élément <main> -->
     <main>
         <h1>Liste des Formations</h1>
         <a href="{% url 'ajouter_formation' %}">Ajouter une nouvelle formation</a>
         <ul>
             {% for formation in formations %}
                 <li>
-                    {{ formation.nom }} - <a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
+                    Nom de la formation : <strong>{{ formation.nom }}</strong>
+                    <br>Description de la formation : {{ formation.description }} 
+                    <br>Établissement dans lequel se déroule la formation : {{ formation.etablissement }}
+                    <br>Durée de la formation : {{ formation.duree }}
+                    <a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
                     - <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
                 </li>
             {% empty %}
