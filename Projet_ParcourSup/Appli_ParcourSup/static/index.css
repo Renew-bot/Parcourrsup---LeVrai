@@ -7,11 +7,7 @@
     padding: 0;
 }
 
-body {
-    font-family: 'Roboto', sans-serif; /* Utilisation d'une police moderne */
-    line-height: 1.6; /* Hauteur de ligne pour un meilleur espacement */
-    background-color: #f4f4f4; /* Couleur de fond */
-}
+
 
 /* Styles pour le header */
 header {
@@ -88,6 +84,17 @@ nav ul li a:hover {
 }
 
 /* Styles pour le footer */
+html, body {
+    height: 100%; /* Fait en sorte que le body et le html prennent toute la hauteur de la fenêtre */
+    margin: 0; /* Supprime les marges par défaut */
+    display: flex; /* Utilise Flexbox pour la mise en page */
+    flex-direction: column; /* Colonne pour empiler le contenu */
+}
+
+main {
+    flex: 1; /* Le contenu principal occupe tout l'espace disponible */
+}
+
 footer {
     background: black; /* Couleur de fond du footer */
     color: white; /* Couleur du texte */
@@ -95,8 +102,9 @@ footer {
     padding: 10px 0; /* Remplissage */
     width: 100%; /* Largeur complète */
     position: relative; /* Position relative */
-    bottom: 0; /* Positionner en bas */
+    bottom: 0; /* Fonctionne avec flex-grow dans le body */
 }
+
 
 /* Styles généraux pour les listes */
 ul {
