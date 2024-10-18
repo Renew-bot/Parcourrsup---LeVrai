@@ -19,18 +19,22 @@
             </ul>
         </nav>
     </header>
-    <h1>Liste des Formations</h1>
-    <a href="{% url 'ajouter_formation' %}">Ajouter une nouvelle formation</a>
-    <ul>
-        {% for formation in formations %}
-            <li>
-                {{ formation.nom }} - <a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
-                - <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
-            </li>
-        {% empty %}
-            <li>Aucune formation trouvée.</li>
-        {% endfor %}
-    </ul>
+
+    <!-- Contenu principal dans un élément <main> -->
+    <main>
+        <h1>Liste des Formations</h1>
+        <a href="{% url 'ajouter_formation' %}">Ajouter une nouvelle formation</a>
+        <ul>
+            {% for formation in formations %}
+                <li>
+                    {{ formation.nom }} - <a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
+                    - <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
+                </li>
+            {% empty %}
+                <li>Aucune formation trouvée.</li>
+            {% endfor %}
+        </ul>
+    </main>
 
     <footer>
         <p>&copy; 2024 Parcoursup - Tous droits réservés</p>
