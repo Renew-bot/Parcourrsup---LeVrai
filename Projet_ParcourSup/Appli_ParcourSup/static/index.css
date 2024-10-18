@@ -16,7 +16,7 @@ body {
 /* Styles pour le header */
 header {
     background: black; /* Couleur de fond */
-    color: white;
+    color: black;
     padding: 10px 20px;
     display: flex; /* Utilisation de flexbox */
     justify-content: space-between; /* Espace entre le logo et la navigation */
@@ -38,7 +38,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white; /* Couleur des liens */
+    color: black; /* Couleur des liens */
     text-decoration: none; /* Pas de soulignement */
     transition: color 0.3s; /* Transition pour l'effet de survol */
 }
