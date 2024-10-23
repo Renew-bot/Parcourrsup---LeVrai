@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter une formation</title>
+    <title>Se connecter</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
@@ -13,19 +13,20 @@
         <nav>
             <ul>
                 <li><a href="{% url 'Page Accueil' %}">Accueil</a></li>
-                <li><a href="{% url 'formations_view' %}">Offres de formation</a></li>
+                <li><a href="{% url 'liste_formations' %}">Offres de formation</a></li>
                 <li><a href="{% url 'profil_view' %}">Profil</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Ajouter une nouvelle formation</h1>
-        <form method="POST">
+        <h1>Se connecter</h1>
+        <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Cela affichera votre formulaire -->
-            <button type="submit">Ajouter</button>
+            {{ form.as_p }}
+            <button type="submit">Se connecter</button>
         </form>
+        <p>Vous n'avez pas encore de compte ? <a href="{% url 'signup' %}">Inscrivez-vous ici</a></p>
     </main>
 
     <footer>

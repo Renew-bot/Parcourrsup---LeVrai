@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class Bonjour(models.Model):
     title=models.CharField(max_length=100)
@@ -18,7 +19,7 @@ class Etablissement(models.Model):
 class Formation(models.Model):
     nom = models.CharField(max_length=200)
     description = models.TextField()
-    duree = models.CharField(max_length=50)  # par exemple, "1 an", "2 ans"
+    duree = models.CharField(max_length=50)
     etablissement = models.CharField(max_length=50)
 
     def __str__(self):

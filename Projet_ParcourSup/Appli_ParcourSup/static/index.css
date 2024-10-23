@@ -95,6 +95,18 @@ main {
     flex: 1; /* Le contenu principal occupe tout l'espace disponible */
 }
 
+.Formation {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.ajouter {
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+
 footer {
     background: black; /* Couleur de fond du footer */
     color: white; /* Couleur du texte */
