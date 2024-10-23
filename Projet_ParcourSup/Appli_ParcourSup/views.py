@@ -3,8 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Formation
 from .forms import FormationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from .forms import CustomUserCreationForm
+from django.contrib.auth import login, authenticate
+from .models import Profile
+from django.contrib.auth.forms import AuthenticationForm
 
 def Bonjour_view(request):
     tasks = Bonjour.objects.all()
@@ -45,15 +47,32 @@ def supprimer_formation(request, pk):
 @login_required
 def profil_view(request):
     utilisateur = request.user
-    return render(request, 'Appli_ParcourSup/profil.html', {'utilisateur': utilisateur})
+    profile, created = Profile.objects.get_or_create(user=utilisateur)
+    return render(request, 'Appli_ParcourSup/profil.html', {'utilisateur': utilisateur, 'profile': profile})
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            profile = Profile.objects.create(user=user, status=form.cleaned_data['status'])
             login(request, user)
             return redirect('Page Accueil')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
+    
     return render(request, 'Appli_ParcourSup/signup.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('Page Accueil')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'Appli_ParcourSup/login.html', {'form': form})
