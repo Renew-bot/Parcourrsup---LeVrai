@@ -1,98 +1,88 @@
-/* styles.css */
-
-/* Reset de base */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-
-
-/* Styles pour le header */
 header {
-    background: black; /* Couleur de fond */
+    background: black;
     color: black;
     padding: 10px 20px;
-    display: flex; /* Utilisation de flexbox */
-    justify-content: space-between; /* Espace entre le logo et la navigation */
-    align-items: center; /* Alignement vertical */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header .logo {
-    font-size: 24px; /* Taille de la police du logo */
-    font-weight: 700; /* Gras */
+    font-size: 24px;
+    font-weight: 700;
 }
 
 nav ul {
-    list-style: none; /* Suppression des puces de la liste */
-    display: flex; /* Utilisation de flexbox pour la navigation */
+    list-style: none;
+    display: flex;
 }
 
 nav ul li {
-    margin-left: 20px; /* Espacement entre les éléments du menu */
+    margin-left: 20px;
 }
 
 nav ul li a {
-    color: black; /* Couleur des liens */
-    text-decoration: none; /* Pas de soulignement */
-    transition: color 0.3s; /* Transition pour l'effet de survol */
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #d4d4d4; /* Couleur au survol */
+    color: #d4d4d4;
 }
 
-/* Section héro */
 .hero {
-    background: #f5f5f5; /* Couleur de fond de la section héro */
+    background: #f5f5f5;
     padding: 50px 20px;
     text-align: center;
 }
 
 .hero h1 {
-    font-size: 36px; /* Taille de la police du h1 */
-    margin-bottom: 20px; /* Marge sous le titre */
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
-/* Actions et boutons */
 .actions {
-    margin-top: 20px; /* Marge au-dessus des actions */
+    margin-top: 20px;
 }
 
 .button {
-    background: black; /* Couleur de fond des boutons */
-    color: white; /* Couleur du texte des boutons */
-    padding: 10px 20px; /* Remplissage */
-    text-decoration: none; /* Pas de soulignement */
-    border-radius: 5px; /* Coins arrondis */
-    margin: 10px; /* Marge autour du bouton */
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px;
 }
 
-/* Section des fonctionnalités */
 .features {
-    padding: 20px; /* Remplissage pour la section des fonctionnalités */
+    padding: 20px;
 }
 
 .features h2 {
-    text-align: center; /* Centrer le titre des fonctionnalités */
-    margin-bottom: 30px; /* Marge sous le titre */
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .feature {
-    margin: 20px 0; /* Marge en haut et en bas des éléments de fonctionnalité */
+    margin: 20px 0;
 }
 
-/* Styles pour le footer */
 html, body {
-    height: 100%; /* Fait en sorte que le body et le html prennent toute la hauteur de la fenêtre */
-    margin: 0; /* Supprime les marges par défaut */
-    display: flex; /* Utilise Flexbox pour la mise en page */
-    flex-direction: column; /* Colonne pour empiler le contenu */
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
-    flex: 1; /* Le contenu principal occupe tout l'espace disponible */
+    flex: 1;
 }
 
 .Formation {
@@ -108,26 +98,52 @@ main {
 }
 
 footer {
-    background: black; /* Couleur de fond du footer */
-    color: white; /* Couleur du texte */
-    text-align: center; /* Centrer le texte */
-    padding: 10px 0; /* Remplissage */
-    width: 100%; /* Largeur complète */
-    position: relative; /* Position relative */
-    bottom: 0; /* Fonctionne avec flex-grow dans le body */
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
 }
 
-
-/* Styles généraux pour les listes */
 ul {
-    list-style-type: none; /* Suppression des puces des listes */
-    padding: 0; /* Remplissage à 0 */
+    list-style-type: none;
+    padding: 0;
 }
 
 ul li {
-    background-color: white; /* Fond blanc pour chaque élément de la liste */
-    padding: 10px; /* Remplissage */
-    margin: 5px 0; /* Marge en haut et en bas */
-    border-radius: 5px; /* Coins arrondis */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    background-color: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+    background: #f5f5f5;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.info-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    font-size: 1.1rem;
+}
+
+.news-section ul {
+    text-align: center;
+}
+
+.news-section ul li {
+    margin-bottom: 10px;
+}
+
+.news-section h2 {
+    background: #f5f5f5;
+    text-align: center;
 }
