@@ -28,6 +28,10 @@
                     <br>Description de la formation : {{ formation.description }} 
                     <br>Établissement dans lequel se déroule la formation : {{ formation.etablissement }}
                     <br>Durée de la formation : {{ formation.duree }}
+                    {% if formation.image %}
+                        <br>Image :
+                        <br><img src="{{ formation.image }}" alt="Image de {{ formation.nom }}" style="max-width: 300px;">
+                    {% endif %}
                     <br><a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
                     - <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
                 </li>

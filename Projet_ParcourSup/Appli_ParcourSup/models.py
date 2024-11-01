@@ -23,6 +23,7 @@ class Formation(models.Model):
     description = models.TextField()
     duree = models.CharField(max_length=50)
     etablissement = models.CharField(max_length=50)
+    image = models.URLField(max_length=300, blank=True, null=True)
 
     def __str__(self):
         return self.nom

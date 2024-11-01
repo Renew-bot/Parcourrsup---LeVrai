@@ -18,7 +18,7 @@ def formations_view(request):
 
 def ajouter_formation(request):
     if request.method == 'POST':
-        form = FormationForm(request.POST)
+        form = FormationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('liste_formations')
@@ -29,7 +29,7 @@ def ajouter_formation(request):
 def modifier_formation(request, pk):
     formation = get_object_or_404(Formation, pk=pk)
     if request.method == 'POST':
-        form = FormationForm(request.POST, instance=formation)
+        form = FormationForm(request.POST, request.FILES, instance=formation)
         if form.is_valid():
             form.save()
             return redirect('liste_formations')

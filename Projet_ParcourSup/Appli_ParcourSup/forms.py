@@ -7,7 +7,7 @@ from .models import Profile
 class FormationForm(forms.ModelForm):
     class Meta:
         model = Formation
-        fields = ['nom', 'description', 'duree', 'etablissement']
+        fields = ['nom', 'description', 'duree', 'etablissement', 'image']
 
 class CustomUserCreationForm(UserCreationForm):
     status = forms.ChoiceField(choices=Profile.STATUS_CHOICES)
