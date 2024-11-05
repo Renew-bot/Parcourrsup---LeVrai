@@ -2,8 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>Accès restreint</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
@@ -20,13 +19,9 @@
     </header>
 
     <main>
-        <h1>Votre profil : {{ utilisateur.username }}</h1>
-        <p>Email: {{ utilisateur.email }}</p>
-        <p>Statut de compte: {{ profile.status }}</p>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Se déconnecter</button>
-        </form>
+        <h1>Accès restreint</h1>
+        <p>Vous n'avez pas de compte ? <a href="{% url 'signup' %}">Créez-en un ici</a>.</p>
+        <p>Vous avez déjà un compte ? <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
     </main>
 
     <footer>

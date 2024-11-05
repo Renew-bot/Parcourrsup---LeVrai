@@ -44,7 +44,7 @@ def supprimer_formation(request, pk):
         return redirect('liste_formations')
     return render(request, 'Appli_ParcourSup/supprimer_formation.html', {'formation': formation})
 
-@login_required
+@login_required(login_url='pas_connecte')
 def profil_view(request):
     utilisateur = request.user
     profile, created = Profile.objects.get_or_create(user=utilisateur)
@@ -76,3 +76,6 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'Appli_ParcourSup/login.html', {'form': form})
+
+def pas_connecte_view(request):
+    return render(request, 'Appli_ParcourSup/pas_connecte.html')

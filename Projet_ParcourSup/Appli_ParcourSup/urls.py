@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('index/', views.Bonjour_view, name='Page Accueil'),  
@@ -13,6 +14,8 @@ urlpatterns = [
     path('profil/', views.profil_view, name='profil_view'),
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup_view, name='signup'),
+    path('logout/', LogoutView.as_view(next_page='profil_view'), name='logout'),
+    path('pas_connecte/', views.pas_connecte_view, name='pas_connecte'),
 ]
 
 if settings.DEBUG:

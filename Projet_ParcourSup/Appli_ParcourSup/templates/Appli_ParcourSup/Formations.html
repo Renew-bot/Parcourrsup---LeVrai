@@ -24,12 +24,12 @@
         <ul>
             {% for formation in formations %}
                 <li class="Formation">
-                    Nom de la formation : <strong>{{ formation.nom }}</strong>
-                    <br>Description de la formation : {{ formation.description }} 
-                    <br>Établissement dans lequel se déroule la formation : {{ formation.etablissement }}
-                    <br>Durée de la formation : {{ formation.duree }}
+                    <strong>Nom de la formation :</strong> {{ formation.nom }}
+                    <br><strong>Description de la formation :</strong> {{ formation.description }} 
+                    <br><strong>Établissement dans lequel se déroule la formation :</strong> {{ formation.etablissement }}
+                    <br><strong>Durée de la formation :</strong> {{ formation.duree }}
                     {% if formation.image %}
-                        <br>Image :
+                        <br><strong>Image :</strong>
                         <br><img src="{{ formation.image }}" alt="Image de {{ formation.nom }}" style="max-width: 300px;">
                     {% endif %}
                     <br><a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
