@@ -35,11 +35,15 @@
                     <br><a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
                     - <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
                     - <a href="{% url 'postuler_formation' formation.pk %}">Postuler</a>
-                    {% for candidat in formation.candidats.all %}
-                        <br> Candidats ayant postulés à la formation : {{ candidat.username }}{% if not forloop.last %}, {% endif %}
-                    {% empty %}
+
+                    <br>Candidats ayant postulés à la formation :
+                    {% if formation.candidats.all.count > 0 %}
+                        {% for candidat in formation.candidats.all %}
+                            {{ candidat.username }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    {% else %}
                         Aucun candidat
-                    {% endfor %}
+                    {% endif %}
                 </li>
             {% empty %}
                 <li>Aucune formation trouvée.</li>
