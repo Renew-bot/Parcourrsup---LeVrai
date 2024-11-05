@@ -24,6 +24,7 @@ class Formation(models.Model):
     duree = models.CharField(max_length=50)
     etablissement = models.CharField(max_length=50)
     image = models.URLField(max_length=300, blank=True, null=True)
+    candidats = models.ManyToManyField(User, related_name='postulations', blank=True)
 
     def __str__(self):
         return self.nom
@@ -38,3 +39,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+class Candidature(models.Model):
+    utilisateur = models.ForeignKey(User, on_delete=models.CASCADE)
+    formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
+    email = models.EmailField()
+    lettre_motivation = models.TextField()
+    date_postulation = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nom} {self.prenom} - {self.formation.nom}"

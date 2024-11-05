@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Postuler à {{ formation.nom }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">Parcoursup</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Page Accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'liste_formations' %}">Offres de formation</a></li>
+                <li><a href="#">Profil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Postuler à {{ formation.nom }}</h1>
+        <p><strong>Description:</strong> {{ formation.description }}</p>
+        <p><strong>Durée:</strong> {{ formation.duree }}</p>
+        <p><strong>Établissement:</strong> {{ formation.etablissement }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirmer ma candidature</button>
+        </form>
+        
+        <a href="{% url 'liste_formations' %}">Retour à la liste des formations</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Parcoursup - Tous droits réservés</p>
+    </footer>
+</body>
+</html>

@@ -7,6 +7,7 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import login, authenticate
 from .models import Profile
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
 def Bonjour_view(request):
     tasks = Bonjour.objects.all()
@@ -79,3 +80,17 @@ def login_view(request):
 
 def pas_connecte_view(request):
     return render(request, 'Appli_ParcourSup/pas_connecte.html')
+
+@login_required(login_url='pas_connecte')
+def postuler_formation(request, pk):
+    formation = get_object_or_404(Formation, pk=pk)
+
+    if request.method == 'POST':
+        if request.user in formation.candidats.all():
+            messages.warning(request, 'Vous avez déjà postulé à cette formation.')
+        else:
+            formation.candidats.add(request.user)
+            messages.success(request, 'Vous avez postulé à la formation avec succès !')
+            return redirect('liste_formations')
+
+    return render(request, 'Appli_ParcourSup/postuler_formation.html', {'formation': formation})
