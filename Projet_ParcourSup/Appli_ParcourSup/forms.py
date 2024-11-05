@@ -3,6 +3,7 @@ from .models import Formation
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile
+from .models import Candidature
 
 class FormationForm(forms.ModelForm):
     class Meta:
@@ -22,3 +23,8 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             profile.save()
         return user
+    
+class CandidatureForm(forms.ModelForm):
+    class Meta:
+        model = Candidature
+        fields = ['nom', 'prenom', 'email', 'lettre_motivation']

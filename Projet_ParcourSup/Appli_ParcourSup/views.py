@@ -8,6 +8,8 @@ from django.contrib.auth import login, authenticate
 from .models import Profile
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from .forms import CandidatureForm
+from .models import Candidature
 
 def Bonjour_view(request):
     tasks = Bonjour.objects.all()
@@ -49,7 +51,8 @@ def supprimer_formation(request, pk):
 def profil_view(request):
     utilisateur = request.user
     profile, created = Profile.objects.get_or_create(user=utilisateur)
-    return render(request, 'Appli_ParcourSup/profil.html', {'utilisateur': utilisateur, 'profile': profile})
+    candidatures = Candidature.objects.filter(utilisateur=utilisateur)
+    return render(request, 'Appli_ParcourSup/profil.html', {'utilisateur': utilisateur, 'profile': profile, 'candidatures': candidatures})
 
 def signup_view(request):
     if request.method == 'POST':
@@ -86,11 +89,15 @@ def postuler_formation(request, pk):
     formation = get_object_or_404(Formation, pk=pk)
 
     if request.method == 'POST':
-        if request.user in formation.candidats.all():
-            messages.warning(request, 'Vous avez déjà postulé à cette formation.')
-        else:
-            formation.candidats.add(request.user)
-            messages.success(request, 'Vous avez postulé à la formation avec succès !')
+        form = CandidatureForm(request.POST)
+        if form.is_valid():
+            candidature = form.save(commit=False)
+            candidature.utilisateur = request.user
+            candidature.formation = formation
+            candidature.save()
+            messages.success(request, 'Votre candidature a été soumise avec succès!')
             return redirect('liste_formations')
+    else:
+        form = CandidatureForm()
 
-    return render(request, 'Appli_ParcourSup/postuler_formation.html', {'formation': formation})
+    return render(request, 'Appli_ParcourSup/postuler_formation.html', {'formation': formation, 'form': form})

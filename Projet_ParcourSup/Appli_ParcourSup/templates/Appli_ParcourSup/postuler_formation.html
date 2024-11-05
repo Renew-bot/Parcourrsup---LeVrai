@@ -26,6 +26,7 @@
 
         <form method="post">
             {% csrf_token %}
+            {{ form.as_p }}
             <button type="submit">Confirmer ma candidature</button>
         </form>
         

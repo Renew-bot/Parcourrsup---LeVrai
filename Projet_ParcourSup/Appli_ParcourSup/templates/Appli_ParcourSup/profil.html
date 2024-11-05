@@ -23,6 +23,23 @@
         <h1>Votre profil : {{ utilisateur.username }}</h1>
         <p>Email: {{ utilisateur.email }}</p>
         <p>Statut de compte: {{ profile.status }}</p>
+        
+        <h2>Vos candidatures :</h2>
+        <ul>
+            {% for candidature in candidatures %}
+                <li>
+                    <strong>Formation :</strong> {{ candidature.formation.nom }}<br>
+                    <strong>Nom :</strong> {{ candidature.nom }}<br>
+                    <strong>Prénom :</strong> {{ candidature.prenom }}<br>
+                    <strong>Email :</strong> {{ candidature.email }}<br>
+                    <strong>Lettre de motivation :</strong> {{ candidature.lettre_motivation}}<br>
+                    <strong>Date :</strong> {{ candidature.date_postulation }}<br>
+                </li>
+            {% empty %}
+                <li>Aucune candidature trouvée.</li>
+            {% endfor %}
+        </ul>
+    
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit">Se déconnecter</button>

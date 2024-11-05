@@ -39,7 +39,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-    
+
 class Candidature(models.Model):
     utilisateur = models.ForeignKey(User, on_delete=models.CASCADE)
     formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
