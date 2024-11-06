@@ -17,6 +17,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='profil_view'), name='logout'),
     path('pas_connecte/', views.pas_connecte_view, name='pas_connecte'),
     path('formations/postuler/<int:pk>/', views.postuler_formation, name='postuler_formation'),
+    path('formations/accepter/<int:formation_pk>/<int:candidat_pk>/', views.accepter_candidature, name='accepter_candidature'),
+    path('formations/refuser/<int:formation_pk>/<int:candidat_pk>/', views.refuser_candidature, name='refuser_candidature'),
 ]
 
 if settings.DEBUG:

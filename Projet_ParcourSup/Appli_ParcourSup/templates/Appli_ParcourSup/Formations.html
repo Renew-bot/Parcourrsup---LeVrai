@@ -26,30 +26,51 @@
                 <li class="Formation">
                     <strong>Nom de la formation :</strong> {{ formation.nom }}
                     <br><strong>Description de la formation :</strong> {{ formation.description }} 
-                    <br><strong>Établissement dans lequel se déroule la formation :</strong> {{ formation.etablissement }}
-                    <br><strong>Durée de la formation :</strong> {{ formation.duree }}
+                    <br><strong>Établissement :</strong> {{ formation.etablissement }}
+                    <br><strong>Durée :</strong> {{ formation.duree }}
                     {% if formation.image %}
                         <br><strong>Image :</strong>
                         <br><img src="{{ formation.image }}" alt="Image de {{ formation.nom }}" style="max-width: 300px;">
                     {% endif %}
-                    <br><a href="{% url 'modifier_formation' formation.pk %}">Modifier</a>
-                    - <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
-                    - <a href="{% url 'postuler_formation' formation.pk %}">Postuler</a>
 
-                    <br>Candidats ayant postulés à la formation :
-                    {% if formation.candidats.all.count > 0 %}
-                        {% for candidat in formation.candidats.all %}
-                            {{ candidat.username }}{% if not forloop.last %}, {% endif %}
-                        {% endfor %}
+                    {% if user.is_authenticated %}
+                        {% if user.profile.status == 'ecole' %}
+                            <br>
+                            <a href="{% url 'modifier_formation' formation.pk %}">Modifier</a> - 
+                            <a href="{% url 'supprimer_formation' formation.pk %}">Supprimer</a>
+                            <br><strong>Candidats ayant postulé :</strong>
+                            {% if formation.candidature_set.count > 0 %}
+                                {% for candidature in formation.candidature_set.all %}
+                                    {{ candidature.utilisateur.username }}
+                                    <form action="{% url 'accepter_candidature' formation.pk candidature.utilisateur.pk %}" method="post" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit">Accepter</button>
+                                    </form>
+                                    <form action="{% url 'refuser_candidature' formation.pk candidature.utilisateur.pk %}" method="post" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit">Refuser</button>
+                                    </form>
+                                    {% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                Aucun candidat
+                            {% endif %}
+                        {% elif user.profile.status == 'etudiant' %}
+                            <br>
+                            <a href="{% url 'postuler_formation' formation.pk %}">Postuler</a>
+                        {% endif %}
                     {% else %}
-                        Aucun candidat
+                        <p><a href="{% url 'login' %}">Connectez-vous</a> pour plus d'options.</p>
                     {% endif %}
                 </li>
             {% empty %}
                 <li>Aucune formation trouvée.</li>
             {% endfor %}
         </ul>
-        <a class="ajouter" href="{% url 'ajouter_formation' %}">Ajouter une nouvelle formation</a>
+
+        {% if user.is_authenticated and user.profile.status == 'ecole' %}
+            <a class="ajouter" href="{% url 'ajouter_formation' %}">Ajouter une nouvelle formation</a>
+        {% endif %}
     </main>
 
     <footer>

@@ -24,7 +24,6 @@ class Formation(models.Model):
     duree = models.CharField(max_length=50)
     etablissement = models.CharField(max_length=50)
     image = models.URLField(max_length=300, blank=True, null=True)
-    candidats = models.ManyToManyField(User, related_name='postulations', blank=True)
 
     def __str__(self):
         return self.nom

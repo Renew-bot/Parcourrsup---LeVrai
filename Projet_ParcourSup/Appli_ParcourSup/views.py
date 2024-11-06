@@ -10,6 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .forms import CandidatureForm
 from .models import Candidature
+from .models import User
 
 def Bonjour_view(request):
     tasks = Bonjour.objects.all()
@@ -19,33 +20,48 @@ def formations_view(request):
     formations = Formation.objects.all()
     return render(request, 'Appli_ParcourSup/Formations.html', {'formations': formations})
 
+@login_required
 def ajouter_formation(request):
-    if request.method == 'POST':
-        form = FormationForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('liste_formations')
+    if request.user.profile.status == 'ecole':
+        if request.method == 'POST':
+            form = FormationForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('liste_formations')
+        else:
+            form = FormationForm()
+        return render(request, 'Appli_ParcourSup/ajouter_formation.html', {'form': form})
     else:
-        form = FormationForm()
-    return render(request, 'Appli_ParcourSup/ajouter_formation.html', {'form': form})
+        messages.error(request, 'Vous n\'avez pas la permission d\'ajouter une formation.')
+        return redirect('liste_formations')
 
+@login_required
 def modifier_formation(request, pk):
     formation = get_object_or_404(Formation, pk=pk)
-    if request.method == 'POST':
-        form = FormationForm(request.POST, request.FILES, instance=formation)
-        if form.is_valid():
-            form.save()
-            return redirect('liste_formations')
+    if request.user.profile.status == 'ecole':
+        if request.method == 'POST':
+            form = FormationForm(request.POST, request.FILES, instance=formation)
+            if form.is_valid():
+                form.save()
+                return redirect('liste_formations')
+        else:
+            form = FormationForm(instance=formation)
+        return render(request, 'Appli_ParcourSup/modifier_formation.html', {'form': form})
     else:
-        form = FormationForm(instance=formation)
-    return render(request, 'Appli_ParcourSup/modifier_formation.html', {'form': form})
+        messages.error(request, 'Vous n\'avez pas la permission de modifier cette formation.')
+        return redirect('liste_formations')
 
+@login_required
 def supprimer_formation(request, pk):
     formation = get_object_or_404(Formation, pk=pk)
-    if request.method == 'POST':
-        formation.delete()
+    if request.user.profile.status == 'ecole':
+        if request.method == 'POST':
+            formation.delete()
+            return redirect('liste_formations')
+        return render(request, 'Appli_ParcourSup/supprimer_formation.html', {'formation': formation})
+    else:
+        messages.error(request, 'Vous n\'avez pas la permission de supprimer cette formation.')
         return redirect('liste_formations')
-    return render(request, 'Appli_ParcourSup/supprimer_formation.html', {'formation': formation})
 
 @login_required(login_url='pas_connecte')
 def profil_view(request):
@@ -101,3 +117,25 @@ def postuler_formation(request, pk):
         form = CandidatureForm()
 
     return render(request, 'Appli_ParcourSup/postuler_formation.html', {'formation': formation, 'form': form})
+
+@login_required
+def accepter_candidature(request, formation_pk, candidat_pk):
+    formation = get_object_or_404(Formation, pk=formation_pk)
+    candidat = get_object_or_404(User, pk=candidat_pk)
+
+    if request.user.profile.status == 'ecole':
+        messages.success(request, f'La candidature de {candidat.username} a été acceptée.')
+    else:
+        messages.error(request, 'Vous n\'avez pas la permission de réaliser cette action.')
+    return redirect('liste_formations')
+
+@login_required
+def refuser_candidature(request, formation_pk, candidat_pk):
+    formation = get_object_or_404(Formation, pk=formation_pk)
+    candidat = get_object_or_404(User, pk=candidat_pk)
+
+    if request.user.profile.status == 'ecole':
+        messages.success(request, f'La candidature de {candidat.username} a été refusée.')
+    else:
+        messages.error(request, 'Vous n\'avez pas la permission de réaliser cette action.')
+    return redirect('liste_formations')
