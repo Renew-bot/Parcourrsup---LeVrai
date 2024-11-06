@@ -19,6 +19,7 @@ urlpatterns = [
     path('formations/postuler/<int:pk>/', views.postuler_formation, name='postuler_formation'),
     path('formations/accepter/<int:formation_pk>/<int:candidat_pk>/', views.accepter_candidature, name='accepter_candidature'),
     path('formations/refuser/<int:formation_pk>/<int:candidat_pk>/', views.refuser_candidature, name='refuser_candidature'),
+    path('candidature/details/<int:pk>/', views.details_candidature, name='details_candidature'),
 ]
 
 if settings.DEBUG:

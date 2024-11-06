@@ -121,21 +121,37 @@ def postuler_formation(request, pk):
 @login_required
 def accepter_candidature(request, formation_pk, candidat_pk):
     formation = get_object_or_404(Formation, pk=formation_pk)
-    candidat = get_object_or_404(User, pk=candidat_pk)
+    candidature = get_object_or_404(Candidature, utilisateur__pk=candidat_pk, formation=formation)
 
     if request.user.profile.status == 'ecole':
-        messages.success(request, f'La candidature de {candidat.username} a été acceptée.')
+        candidature.statut = 'acceptee'
+        candidature.save()
+        messages.success(request, f'La candidature de {candidature.utilisateur.username} a été acceptée.')
     else:
         messages.error(request, 'Vous n\'avez pas la permission de réaliser cette action.')
+
     return redirect('liste_formations')
 
 @login_required
 def refuser_candidature(request, formation_pk, candidat_pk):
     formation = get_object_or_404(Formation, pk=formation_pk)
-    candidat = get_object_or_404(User, pk=candidat_pk)
+    candidature = get_object_or_404(Candidature, utilisateur__pk=candidat_pk, formation=formation)
 
     if request.user.profile.status == 'ecole':
-        messages.success(request, f'La candidature de {candidat.username} a été refusée.')
+        candidature.statut = 'refusee'
+        candidature.save()
+        messages.success(request, f'La candidature de {candidature.utilisateur.username} a été refusée.')
     else:
         messages.error(request, 'Vous n\'avez pas la permission de réaliser cette action.')
+
     return redirect('liste_formations')
+
+@login_required
+def details_candidature(request, pk):
+    candidature = get_object_or_404(Candidature, pk=pk)
+
+    if request.user.profile.status == 'ecole':
+        return render(request, 'Appli_ParcourSup/details_candidature.html', {'candidature': candidature})
+    else:
+        messages.error(request, 'Vous n\'avez pas la permission de consulter cette candidature.')
+        return redirect('liste_formations')

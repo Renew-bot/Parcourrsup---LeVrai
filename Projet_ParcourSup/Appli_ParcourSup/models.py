@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 class Bonjour(models.Model):
     title=models.CharField(max_length=100)
@@ -47,6 +45,7 @@ class Candidature(models.Model):
     email = models.EmailField()
     lettre_motivation = models.TextField()
     date_postulation = models.DateTimeField(auto_now_add=True)
+    statut = models.CharField(max_length=10, choices=[('en_attente', 'En attente'), ('acceptee', 'Acceptée'), ('refusee', 'Refusée')], default='en_attente')
 
     def __str__(self):
         return f"{self.nom} {self.prenom} - {self.formation.nom}"

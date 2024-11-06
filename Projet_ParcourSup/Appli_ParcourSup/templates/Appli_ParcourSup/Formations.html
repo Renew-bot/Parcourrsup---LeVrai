@@ -41,16 +41,12 @@
                             <br><strong>Candidats ayant postulé :</strong>
                             {% if formation.candidature_set.count > 0 %}
                                 {% for candidature in formation.candidature_set.all %}
-                                    {{ candidature.utilisateur.username }}
-                                    <form action="{% url 'accepter_candidature' formation.pk candidature.utilisateur.pk %}" method="post" style="display:inline;">
-                                        {% csrf_token %}
-                                        <button type="submit">Accepter</button>
-                                    </form>
-                                    <form action="{% url 'refuser_candidature' formation.pk candidature.utilisateur.pk %}" method="post" style="display:inline;">
-                                        {% csrf_token %}
-                                        <button type="submit">Refuser</button>
-                                    </form>
-                                    {% if not forloop.last %}, {% endif %}
+                                    <p>
+                                        <strong>{{ candidature.utilisateur.username }}</strong>
+                                        - <a href="{% url 'details_candidature' candidature.pk %}">Details de la candidature</a>
+                                    </p>
+                                    <p><strong>Statut:</strong> {{ candidature.get_statut_display }}</p>
+                                    {% if not forloop.last %}---------- {% endif %}
                                 {% endfor %}
                             {% else %}
                                 Aucun candidat

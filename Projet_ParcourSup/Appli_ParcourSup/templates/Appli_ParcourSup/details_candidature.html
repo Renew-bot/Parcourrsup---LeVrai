@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la Candidature</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">Parcoursup</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Page Accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'liste_formations' %}">Offres de formation</a></li>
+                <li><a href="{% url 'profil_view' %}">Profil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Détails de la Candidature</h1>
+        <p><strong>Nom :</strong> {{ candidature.nom }}</p>
+        <p><strong>Prénom :</strong> {{ candidature.prenom }}</p>
+        <p><strong>Email :</strong> {{ candidature.email }}</p>
+        <p><strong>Lettre de motivation :</strong></p>
+        <p>{{ candidature.lettre_motivation }}</p>
+
+        <form action="{% url 'accepter_candidature' candidature.formation.pk candidature.utilisateur.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Accepter la candidature</button>
+        </form>
+
+        <form action="{% url 'refuser_candidature' candidature.formation.pk candidature.utilisateur.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Refuser la candidature</button>
+        </form>
+
+        <br><br>
+        <a href="{% url 'liste_formations' %}">Retour aux formations</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Parcoursup - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
