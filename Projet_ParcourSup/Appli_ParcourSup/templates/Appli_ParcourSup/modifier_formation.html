@@ -23,10 +23,10 @@
         <h1>Modifier une formation</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Cela affichera le formulaire de modification -->
+            {{ form.as_p }}
             <button type="submit">Modifier</button>
         </form>
-        <a href="{% url 'liste_formations' %}">Retour à la liste des formations</a> <!-- Lien de retour à la liste -->
+        <a href="{% url 'liste_formations' %}">Retour à la liste des formations</a>
     </main>
 
     <footer>

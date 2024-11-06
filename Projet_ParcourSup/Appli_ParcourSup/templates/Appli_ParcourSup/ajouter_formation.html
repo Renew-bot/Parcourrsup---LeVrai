@@ -23,7 +23,7 @@
         <h1>Ajouter une nouvelle formation</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Cela affichera votre formulaire -->
+            {{ form.as_p }}
             <button type="submit">Ajouter</button>
         </form>
     </main>

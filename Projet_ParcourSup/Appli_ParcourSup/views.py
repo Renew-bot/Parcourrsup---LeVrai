@@ -10,7 +10,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .forms import CandidatureForm
 from .models import Candidature
-from .models import User
 
 def Bonjour_view(request):
     tasks = Bonjour.objects.all()
